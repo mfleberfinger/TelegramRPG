@@ -1,0 +1,266 @@
+adze
+angon
+anvil
+arquebus
+arrowhead
+atlatl
+awl
+awl pike
+axe
+axe-hammer
+backsword
+badelaire
+ball
+ballista
+ballock dagger
+baselard
+bastard sword
+basuto
+battleaxe
+bec de corbin
+bec de fouine
+bhuj
+billhook
+blade
+blunt object
+boar spear
+board
+board with a nail in it
+bohemian ear spoon
+bola
+bolas
+boomerang
+bow
+brandistock
+brigandine axe
+broadsword
+bulawa
+caltrops
+catapult
+cestus
+chakchu
+chakram
+chisel
+chopper
+cinqueda de toledo
+cinquedea
+claymore
+cleaver
+club
+composite bow
+corseque
+corvo
+cow femur
+crescent blade
+crescent-pick
+crossbow
+curved sword
+cutlass
+dadao
+dagger
+dagger-axe
+dan tien
+darts
+deer antler
+dha
+dirk
+dog head mace
+doumbelek
+dreihander
+duckfoot pistol
+einhander
+estoc
+falcata
+falcatas de toledo
+falchion
+falx
+fauchard
+fire pot
+fire-hardened spear
+fish hook
+fish spear
+fist shield
+flail
+flamberg
+footman's pick
+francisca
+gada
+garrote
+gidja
+gisarme
+glaive
+glaive-guisarme
+goat horn
+grappling hook
+great flail
+great sword
+greek fire
+guisarme
+halberd
+half-pike
+hammer
+hand and a half sword
+hand axe
+hardened mud balls
+harpoon
+hasta
+hatchet
+hoe
+holy water sprinkler
+horn daggers
+horseman's axe
+horseman's hammer
+horseman's mace
+horseman's pick
+human femur
+hunga munga
+inyankali
+iwisa
+javelin
+jaw bone of an ass
+jian
+kampilan
+kanabo
+kaskara
+katana
+katar
+khanda
+khopesh
+klewang
+knife
+kora
+kpinga
+kris
+kujang
+kukri
+kusarigama
+lance
+lance-guisarme
+langets
+longbow
+longsword
+lucerne hammer
+mace
+machete
+macuahuitl
+madu
+man catcher
+mandau
+mangonel
+mattock
+maul
+military fork
+military pick
+military spade
+misericorde
+moonblade
+morning star
+morning star flail
+mortuary sword
+musket
+nagamaki
+naginata
+naginata-naoshi
+naval boarding axe
+needle
+nest of bees
+net
+nine-ring broadsword
+nine-section whip
+nodachi
+onager
+parang
+partisan
+partisan-pike
+patharidanda
+patissa
+peasant flail
+pedang
+pick
+pickaxe
+pike
+pike axe
+plumbata
+polearm
+poleaxe
+pounder
+pounder-hammer
+prison shiv
+pudao
+qama
+qiang
+quarterstaff
+quillon dagger
+rake
+ranseur
+ranseur-pike
+rasp
+rhomphaia
+rock
+rondel dagger
+rope dart
+sabre
+sabre de bataille
+sagaris
+sai
+sakabatou
+sarissa
+saw
+scottish dirk
+scramasax
+scraper
+scythe
+scythe sword
+seax
+severed arm
+sharpened shell
+shashka
+shield
+shortbow
+shot
+shotel
+shotel sword
+sica
+sickle
+sickle sword
+sling
+slingshot
+spear
+spear thrower
+spear tip
+stiletto
+sunblade
+tabarzin
+taijitu
+tepoztopilli
+tewhatewha
+thorn spear
+three-section staff
+throwing axe
+throwing stick
+tomahawk
+trebuchet
+trident
+tumi
+u'kakapopo
+urumi
+vajra-mushti
+voulge
+wakizashi
+war bow
+war club
+war fan
+war fan gun
+war fan spear
+war fan trident
+war flail
+war fork
+war hammer
+war harpoon
+war scythe
+warhammer
+wedge
+whip
+wicker shield
+zulu spear
+zweihander

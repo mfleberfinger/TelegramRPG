@@ -1,0 +1,164 @@
+TODO:
+
+	Write other unfinished systems (see below).
+		- 2023-04-23: It looks like I just need to make the Telegram part now.
+	Remember to send a message when the bot starts (see the "UI" section below)
+	Rebalance the stats so the fights are shorter. They should probably end in
+		two or three turns, if no healing items are used (at least between 1 and
+		10 difficulty). Otherwise, the bot will be sending too many messages.
+		- Changed monster maxHp from difficulty * 50 to difficulty * 35.
+		- Increased the player's power at level 1 from 1 to 2.
+	Make difficulty scale slowly with distance (1/10 or 1/20 of its current rate). [done: 1/20]
+
+
+inventory																		[done]
+	- commands: list, use [item name]
+	- the list command will show appropriate effects
+		+ power boost for weapons "+x power"
+		+ hp boost for armor "+y max hp"
+		+ hp restoration for healing "restore z hp"
+	- the list command will show the number of each item held
+	- the use command will consume, equip, or unequip the item as appropriate
+	- equippable items will get an "(equipped)" note in the list
+	- The option to sell items will exist to allow the player to dispose of
+		items to avoid having the list get too long. There will be no way to
+		buy items. Gold coins will just accumulate in the player's stats.
+	- there will be no size limit
+
+combat																			[done]
+	- Make hp and power integers... Floats will probably just get annoying for the user.
+	- random encounters occur on movement
+	- turn based
+	- options in fight: attack, list, use, flee
+	- attack always hits
+		+ random damage based on player or creature's power stat
+	- losing sends player back to start and costs gold
+	- winning gives player procedurally generated item based on place difficulty
+		+ item randomly selected from the place's procedurally generated item list
+
+player stats																	[done]
+	- hp, xp, power, nothing else
+		+ Make hp and power integers... Floats will probably just get annoying for the user.
+	- defensive equipment will increase max hp
+	- offensive equipment will increase power
+	- power affects attack damage
+	- gold coins: useless, except as a form of points/score (there will be no
+		way to buy things)
+	- Player xp required to level up: previousRequirement + round(previousRequirement * 1.1)
+	- Monster xp reward at difficulty level N: round(30 * math.pow(1.085, N))
+
+movement																		[done]
+	- north, east, south, west
+	- store 2D integer coordinates for player location
+	- random encounters occur on movement
+
+procedurally generated places													[done]
+	- Is it unreasonable to store procedurally generated content to avoid
+		duplication across places?
+		If an place has 100 procedurally generated entities, equivalent to 10
+		lines of text (call it 500 characters) each, then we have 100 * 500 =
+		50,000 characters = 50KB. If we generate 1,000 places, we have 50,000KB =
+		50MB for a single save game (also 50MB in RAM for a single game).
+		+ Not unreasonable, considering that it's unlikely that more than one
+			instance of this will actually be running and that; if I limit the
+			number of available weapon types, helmet types, body armor types,
+			leg armor types, consumable, and monster types to 10 per area; I only
+			have 60 entities in each area's table, not 100. That cuts the size
+			from 50MB to 30MB. Add to that the unlikelihood of the Telegram
+			group discovering 1,000 places and the realistic size of the file
+			gets even smaller (3MB for 100 places).
+	- Typically, would probably want to write things in a way that controls
+		generation with a global seed and doesn't save everything that's generated.
+		However, I want to save everything to prevent reuse of names across places,
+		make items and monsters with the same names have the same stats
+		across places, and avoid having to generate everything at the start of the
+		game and for a preset number of places.
+		+ BOTTOM LINE: There is no need for a global seed because it will not
+			be in control anyway. Generation would still be different depending
+			on the order in which the player revealed area. Therefore, don't
+			bother with a global seed and just save everything that gets generated.
+			
+	- difficulty scales with distance from start
+		+ stronger monsters
+		+ more loot
+	- generate the following
+		+ place names
+			-> place name pattern: {place adjective} [place noun] {postfix}
+			-> The place nouns are ordered by some vague notion of similarity
+				and contain duplicates to imply similarity between multiple places.
+				Do not reorder (unless to improve "similarity") or run the
+				deduplicator on the place names.
+		+ monsters
+			-> monster name pattern: {monster adjective} [monster noun] {postfix}
+			-> Monster nouns are ordered by some vague notion of power. Do not
+				reorder them (except to order more appropriately by "power").
+			-> stats: random values scaled by place difficulty
+			-> xp rewards: random amounts scaled by place difficulty
+			-> names from some table of descriptors and nouns (like loot/items)
+				- Regardless of where monster names come from, add at least a few
+					nonsensical names (e.g. boogum, grobble, nibnab, spilf).
+				- Get a big list from the internet.
+					+ Also get a list of adjectives to randomly tack on.
+					+ ChatGPT might work but there probably exist large lists
+						that are much more convenient than anything it's likely
+						to provide.
+				- Possibly imply monster strength by name (e.g. find some list of
+					creature names ordered by size and use smaller ones for weaker
+					creatures and larger for stronger).
+		+ loot/items
+			-> item name pattern: {adverb} {item adjective} [noun] {postfix}
+			-> type: healing, defensive equipment, offensive equipment
+			-> stats based on place difficulty: heal amount, hp boost, power boost
+			-> names from some table of descriptors and nouns (like monsters)
+				- Get a big list from the internet.
+					+ Also get a list of adjectives to randomly tack on.
+					+ ChatGPT might work but there probably exist large lists
+						that are much more convenient than anything it's likely
+						to provide.
+				- Have a separate list of nouns for three body parts:
+					+ torso: curiass, shirt, jacket, etc.
+					+ head: helmet, hat, hood, etc.
+					+ legs: pants, greaves, etc.
+				- Will need a global list of names.
+					+ Make it a dictionary keyed by item name, with a list
+						containing the the generating location's difficulty
+						level and an item object as the value. Then only allow
+						locations in the same difficulty level to use the item
+						and have them duplicate the object found in the dictionary,
+						rather than creating a new one. Any time a new item name
+						is generated, add it to the dictionary.
+
+saving
+	- This could be done after every command.
+	- Each time a command is issued, the game could check for loaded state, then
+		load (or create) it if none is present.
+	- Just shove everything into a single object and pickle it.
+	- Store each object in its own file, named by the Telegram chat ID.
+	- The Telegram bot will probably just write all of its State objects to files
+		on a set schedule (once every N minutes).
+	- The terminal version could have a save command.
+	
+UI
+	- designed abstractly to allow me to test with a command line and easily
+		port to Telegram wrapper when ready.
+	- commands:
+		+ general: stats (shows xp, hp, power, and max hp)
+		+ movement: north, east, south, west
+		+ inventory: list, use [item name]
+		+ options in fight: attack, list, use, flee
+	- Telegram bot name: tiny_rpg_bot
+	- Send this message when the Telegram bot starts:
+		"""
+		Welcome, adventurer, to Generica, a land of infinite* possibilities!
+
+		* Subject to technical and mechanical limitations. Other limitations may apply. 	// Italicize this part.
+			Infinite does not necessarily mean interesting. Developer assumes no liability
+			for any shortcomings, bugs, bad design, anti-features, or malfeasance.
+			May cause cancer.
+		"""
+	- Opening text for combat:
+		"""
+		You encounter a {monster}. It (advances towards you / lunges at you /
+			glares at you / charges you / rushes you / leaps at you / speeds
+			towards you / runs at you) {adverb}!
+		"""

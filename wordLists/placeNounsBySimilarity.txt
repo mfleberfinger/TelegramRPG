@@ -1,0 +1,207 @@
+glacier
+tundra
+taiga
+temperate rainforest
+deciduous forest
+evergreen forest
+mixed forest
+shrubland
+chaparral
+savanna
+grassland
+steppe
+prairie
+wetland
+swamp
+marsh
+bog
+fen
+heathland
+moor
+meadow
+grassland
+town
+prairie
+spire
+plains
+savannah
+sandy grassland
+dune field
+desert
+oasis
+salt flat
+badlands
+canyon
+plateau
+mountain
+volcano
+plains
+savannah
+prairie
+grassland
+estuary
+salt marsh
+mangrove forest
+beach
+fjord
+bay
+strait
+river
+lake
+reservoir
+pond
+mud volcano
+lava field
+petrified forest
+sinkhole
+cavern
+cave system
+caverns
+pocket realm
+underdark
+pocket plane
+limbo
+abyss
+nether
+ether
+fairyland
+gnome kingdom
+heaven
+hell
+void
+pocket world
+cave
+caves
+grotto
+dungeon
+prison
+gulag
+catacombs
+crypt
+underground tunnels
+tunnels
+cavern
+cave system
+caverns
+cave
+mine
+mines
+caves
+grotto
+gorge
+plateau canyon
+slot canyon
+erosional arch
+natural bridge
+waterfall
+spring
+geyser
+mud pot
+hot spring
+beach
+sand dunes
+lagoon
+fossil beds
+fossil forest
+fossil reef
+karst topography
+sinkhole plain
+dry lake
+saline lake
+alkaline lake
+endorheic basin
+playa
+cienega
+delta
+alluvial fan
+glacial valley
+esker
+kame
+moraine
+drumlins
+glacial erratic
+cirque
+hanging valley
+paternoster lakes
+u-shaped valley
+fiordland
+ice sheet
+ice cap
+ice field
+ice shelf
+nunatak
+ice tunnel
+ice cave
+rock glacier
+sinkhole lake
+tidal flat
+oxbow lake
+meander
+braided river
+estuarine wetland
+riparian zone
+salt marsh flat
+intertidal zone
+sandy beach
+rocky shore
+mangrove swamp
+saltwater marsh
+sedge marsh
+boggy meadow
+rock outcrop
+scree slope
+talus field
+rockslide
+boulder field
+limestone pavement
+limestone cliff
+karst cave
+rock shelter
+crater
+caldera
+shield volcano
+cinder cone
+stratovolcano
+lava dome
+lava tube
+geothermal field
+mud volcano field
+painted desert
+petrified wood forest
+cactus desert
+sandstone canyon
+granite mountain
+limestone hill
+sandstone arch
+petrified sand dunes
+coastal desert
+sandstone cliff
+canyonlands
+sandstone plateau
+sandstone spires
+salt pans
+gypsum dunes
+badwater basin
+joshua tree forest
+alkali flats
+mountain meadow
+water meadow
+pinyon-juniper woodland
+sagebrush steppe
+subalpine forest
+montane forest
+riparian forest
+swamp forest
+floodplain forest
+oak-hickory forest
+fairyland
+gnome kingdom
+coastal redwood forest
+cloud forest
+mangrove swamp forest
+blackwater river
+cave
+mines
+mountain
+mountains
+spire

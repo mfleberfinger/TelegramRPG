@@ -1,0 +1,86 @@
+skirt
+leggings
+breeches
+tights
+jodhpurs
+culottes
+capri pants
+harem pants
+cargo pants
+palazzo pants
+sweatpants
+yoga pants
+skinny jeans
+flared pants
+bell-bottom pants
+high-waisted pants
+low-rise pants
+wide-leg pants
+jogger pants
+cargo shorts
+leather chaps
+chausses
+gambeson leg padding
+cloth leg wraps
+cloth leg braces
+padded cloth leg armor
+quilted leg armor
+leather greaves
+leather cuisses
+leather chausses
+scale leg armor
+maille chausses
+maille leggings
+maille voiders
+splinted greaves
+splinted cuisses
+splinted shin guards
+splinted poleyns
+plate leg harness
+gothic greaves
+gothic cuisses
+gothic poleyns
+gothic leg harness
+milanese greaves
+milanese cuisses
+milanese poleyns
+milanese leg harness
+gothic milanese greaves
+gothic milanese cuisses
+gothic milanese poleyns
+gothic milanese leg harness
+hourglass greaves
+hourglass cuisses
+hourglass poleyns
+hourglass leg harness
+gothic hourglass greaves
+gothic hourglass cuisses
+gothic hourglass poleyns
+gothic hourglass leg harness
+gothic brigandine greaves
+gothic brigandine cuisses
+gothic brigandine poleyns
+gothic brigandine leg harness
+fluted plate greaves
+fluted plate cuisses
+fluted plate poleyns
+fluted plate leg harness
+gothic fluted greaves
+gothic fluted cuisses
+gothic fluted poleyns
+gothic fluted leg harness
+plate greaves
+plate cuisses
+plate poleyns
+etched plate greaves
+etched plate cuisses
+etched plate poleyns
+etched plate leg harness
+embossed plate greaves
+embossed plate cuisses
+embossed plate poleyns
+embossed plate leg harness
+gothic plate-and-maille greaves
+gothic plate-and-maille cuisses
+gothic plate-and-maille poleyns
+gothic plate-and-maille leg harness

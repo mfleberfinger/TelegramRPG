@@ -1,0 +1,132 @@
+pizza
+sushi
+burger
+taco
+fried chicken
+hot dog
+spaghetti
+stir-fry
+pad thai
+ramen
+plate of fish and chips
+burrito
+curry
+fried rice
+pho
+kebab
+falafel
+gyro
+shawarma
+fried calamari
+lobster
+crab cake
+clam chowder
+sashimi
+tempura
+meatloaf
+shepherd's pie
+pot roast
+lasagna
+plate of meatballs
+beef stroganoff
+goulash
+bangers and mash
+fish pie
+chicken pot pie
+quiche
+tuna salad
+caesar salad
+greek salad
+coleslaw
+mac and cheese
+grilled cheese
+club sandwich
+reuben sandwich
+blt
+croissant
+bagel and cream cheese
+cinnamon roll
+apple pie
+blueberry pie
+pumpkin pie
+cherry pie
+chocolate cake
+carrot cake
+cheesecake
+tiramisu
+ice cream
+sorbet
+gelato
+donut
+brownie
+cookie
+muffin
+pancake
+waffle
+slice of french toast
+omelet
+frittata
+plate of huevos rancheros
+shakshuka
+plate of fried eggs
+plate of scrambled eggs
+eggs benedict
+bowl of baked beans
+bowl of grilled vegetables
+bowl of  roasted vegetables
+bowl of  steamed vegetables
+bowl of  stir-fried vegetables
+bowl of  mashed potatoes
+baked potato
+plate of french fries
+plate of hash browns
+plate of sweet potato fries
+plate of onion rings
+bowl of tempura vegetables
+naan bread
+pita bread
+bag of tortilla chips
+popcorn
+pretzel
+trail mix
+granola bar
+jerky
+peanut butter
+bowl of hummus
+bowl of guacamole
+bowl of salsa
+cheese wheel
+sack of nuts
+fruit
+healing potion
+health potion
+bandage
+adhesive tape
+gauze
+ointment
+splint
+cast
+medicine
+suture kit
+homeopathic remedy
+remedy
+panacea
+home remedy
+healing powder
+healing dust
+miracle cure
+pouch of miracle powder
+pouch of health powder
+vial of regenerative ooze
+pouch of regenerative powder
+regenerative potion
+regenerative salve
+regenerative ointment
+salve
+health salve
+healing salve
+collection of thoughts and prayers
+collection of well wishes
+collection of wishful thoughts
+cure
+cure-all
