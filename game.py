@@ -162,7 +162,7 @@ class Game:
 			p.gold -= cost
 			p.hp = p.maxHp
 			p.deaths += 1
-			output = ("The blow is too much for your body to handle.\n" +
+			output = ("\nThe blow is too much for your body to handle.\n" +
 						"As the darkness closes in, you regret that your life couldn't " +
 						"have been more {0} {1}.\n" +
 						"...\n...\n...\n" +
@@ -178,7 +178,7 @@ class Game:
 				debtPhrase = "a debt of "
 			output += "\nYou are left with {0}{1} gold coins.".format(debtPhrase, abs(p.gold))
 		elif self.fight.state == monsters.Fight.VICTORY:
-			output = "You've defeated the {0}!".format(self.fight.monster.name)
+			output = "\nYou've defeated the {0}!".format(self.fight.monster.name)
 			p.xp += self.fight.monster.xpReward
 			p.monstersKilled += 1
 			output += "\nYou gain {0} experience points!".format(self.fight.monster.xpReward)

@@ -1,14 +1,60 @@
-TODO:
+Bugs:
 
-	Write other unfinished systems (see below).
-		- 2023-04-23: It looks like I just need to make the Telegram part now.
-	Remember to send a message when the bot starts (see the "UI" section below)
-	Rebalance the stats so the fights are shorter. They should probably end in
-		two or three turns, if no healing items are used (at least between 1 and
-		10 difficulty). Otherwise, the bot will be sending too many messages.
-		- Changed monster maxHp from difficulty * 50 to difficulty * 35.
-		- Increased the player's power at level 1 from 1 to 2.
-	Make difficulty scale slowly with distance (1/10 or 1/20 of its current rate). [done: 1/20]
+	Weapon names are not sorted by power. If there isn't a good reason to keep
+		them unordered, make the weapon nouns scale similarly to the armor nouns.
+
+	Combat hp doesn't match /stats hp in the group chat:
+		
+		"""
+		You attack the court jester of the werewolf!
+		damage: 16
+		court jester of the werewolf hp: 10
+
+		The court jester of the werewolf attacks you!
+		damage: 0
+		your hp: 100
+		"""
+		
+		"""
+		location: fjord
+		coordinates: (2, 3)
+		level: 2
+		hp: 150/156
+		power: 3
+		experience points: 132
+		next level at: 210
+		gold coins: 0
+		places discovered: 13
+		kills: 4
+		deaths: 0
+		items found: 1
+		"""
+
+	Item names with capital letters can't be used or sold: [fixed (the easy way)]
+		- Possible fixes:
+			+ Easier: Make the Telegram bot accept mixed case commands, instead [done]
+				of converting them to all lowercase.
+			+ Better: Keep converting commands to lowercase and also convert all
+				names to lowercase before putting them in the dictionary.
+				-> Would need to write a program to fix the dictionaries in the
+					save files to use all lowercase keys to avoid losing the
+					group's game.
+
+
+
+New Features:
+
+	To reduce spam: control the fights with an inline keyboard (buttons that
+		appear under the message in the chat) that just edits a single fight/encounter
+		message.
+
+	Add something to buy with money. Probably make money easier to get (increase
+		item values and maybe add another way to get money).
+
+	Could procedurally generate puzzles if people actually play with this enough
+		to bother adding features: http://gamelab.mit.edu/research/puzzledice/
+		
+	Generate a map of all discovered areas and send to chat as an image.
 
 
 inventory																		[done]

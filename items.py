@@ -65,7 +65,7 @@ class Inventory:
 			output += "\n   quantity: " + str(item.quantity)
 			output += "\n"
 		if len(self.items) == 0:
-			output = "You have no items."
+			output = "You have no items. " # This trailing space is a hacky way to avoid cutting off the period when returning.
 		return output[:-1] # Don't return the extra newline.
 	
 	def addItem(self, item):

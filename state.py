@@ -18,10 +18,12 @@ class State:
 			self.player = loadedState.player
 			self.inventory = loadedState.inventory
 			self.world = loadedState.world
+			self.newGame = False # If True, the Telegram bot will send an intro message.
 		else:
 			self.player = player.Player()
 			self.inventory = items.Inventory()
 			self.world = world.World()
+			self.newGame = True
 	
 	def load(self):
 		with open(State.SAVE_DIRECTORY + self.saveName, "rb") as f:
