@@ -5,12 +5,54 @@ import state
 import telebot
 
 BOT_NAME = "@tiny_rpg_bot"
+#BOT_NAME = "@Mltest_bot"
 
 # Dictionary of State objects keyed by chat ID (a number).
 gameTable = dict()
 
 with open("token", "r") as f:
 	bot = telebot.TeleBot(f.read(), parse_mode=None)
+	
+combatMarkup = telebot.util.quick_markup({
+		"attack": {"callback_data": "attack"},
+		"flee": {"callback_data": "flee"},
+	}, row_width=2)
+
+
+# chatId: ChatId to send to.
+# output: Output from the game.
+# g: Instance of the game.
+# s: Instance of the state object.
+def sendCombatOutput(chatId, output, g, s):
+	newOutput = ""
+	# Fight started.
+	if g.isInCombat and not s.wasInCombat:
+		newOutput = output
+		sentMessage = bot.send_message(chatId, newOutput, reply_markup=combatMarkup)
+		# Remember this message's ID and text so we can edit it later.
+		# Also remember that we're doing combat output (editing a single message).
+		s.wasInCombat = True
+		s.combatMessageText = newOutput
+		s.combatMessageId = sentMessage.message_id
+	# Fight continuing.
+	elif g.isInCombat:
+		newOutput = s.combatMessageText + "\n\n" + output
+		# Message text longer than 4096 characters can cause errors.
+		# This situation should be unlikely so we'll just get rid of all of
+		# the old output from this fight if it happens.
+		if len(newOutput) > 4096:
+			newOutput = output
+		bot.edit_message_text(newOutput, chatId, s.combatMessageId, reply_markup=combatMarkup)
+		s.combatMessageText = newOutput
+	# Fight ended.
+	elif (not g.isInCombat) and s.wasInCombat:
+		newOutput = s.combatMessageText + "\n\n" + output
+		if len(newOutput) > 4096:
+			newOutput = output
+		bot.edit_message_text(newOutput, chatId, s.combatMessageId, reply_markup=None)
+		s.wasInCombat = False
+		s.combatMessageText = ""
+		s.combatMessageId = None
 
 @bot.message_handler(commands = ["help"])
 def help(message):
@@ -30,12 +72,12 @@ def help(message):
 # Receive all messages and parse them as commands if valid.
 @bot.message_handler(commands = ["start", "n", "e", "s", "w", "stats", "list", "use", "sell", "attack", "flee"])
 def handle_command(message):
-	id = message.chat.id
+	chatId = message.chat.id
 	output = ""
-	if id not in gameTable:
-		s = state.State(str(id))
+	if chatId not in gameTable:
+		s = state.State(str(chatId))
 		g = game.Game(s)
-		gameTable[id] = g
+		gameTable[chatId] = g
 		if s.newGame:
 			output += ("Welcome, adventurer, to Generica, a land of infinite* possibilities!\n\n\n" +
 						"* Subject to technical and mechanical limitations. Other limitations may apply. " +
@@ -43,7 +85,7 @@ def handle_command(message):
 						"for any shortcomings, bugs, bad design, anti-features, or malfeasance. " +
 						"May cause cancer.\n\n\n")
 	else:
-		g = gameTable[id]
+		g = gameTable[chatId]
 		s = g.gameState
 	cmd = message.text
 	cmd = re.sub(BOT_NAME, "", cmd)
@@ -82,12 +124,26 @@ def handle_command(message):
 	elif cmdSplit[0] == "/flee":
 		output += g.flee()
 	if output != "":
-		bot.reply_to(message, output)
+		if s.wasInCombat or g.isInCombat:
+			sendCombatOutput(chatId, output, g, s)
+		else:
+			bot.reply_to(message, output)
 	#print("output = " + output)
 	# Just save after every command. This could be done on a schedule instead but
 	# telebot makes this the more convenient approach.
 	s.save()
 
-
-
+@bot.callback_query_handler(lambda a : True)
+def callBackQueryHandler(callbackQuery):
+	chatId = callbackQuery.message.chat.id
+	output = ""
+	g = gameTable[chatId]
+	s = g.gameState
+	if callbackQuery.data == "attack":
+		output += g.attack()
+	else:
+		output += g.flee()
+	sendCombatOutput(chatId, output, g, s)
+	
+	
 bot.infinity_polling()

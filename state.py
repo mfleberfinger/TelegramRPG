@@ -19,11 +19,23 @@ class State:
 			self.inventory = loadedState.inventory
 			self.world = loadedState.world
 			self.newGame = False # If True, the Telegram bot will send an intro message.
+			# Used to determine whether a fight is in progress by remembering whether the
+			# Game instance said we were in a fight during the most recent command.
+			# If the bot shuts down during a fight, we don't save the fight's state...
+			# Maybe not a good design, but work with it by not loading the bot's combat state either.
+			self.wasInCombat = False
+			# Most recent text of the combat message.
+			self.combatMessageText = ""
+			# ID of the message being edited for combat output.
+			self.combatMessageId = None
 		else:
 			self.player = player.Player()
 			self.inventory = items.Inventory()
 			self.world = world.World()
 			self.newGame = True
+			self.wasInCombat = False
+			self.combatMessageText = ""
+			self.combatMessageId = None
 	
 	def load(self):
 		with open(State.SAVE_DIRECTORY + self.saveName, "rb") as f:

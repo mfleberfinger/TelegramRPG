@@ -44,9 +44,8 @@ Bugs:
 
 New Features:
 
-	To reduce spam: control the fights with an inline keyboard (buttons that
-		appear under the message in the chat) that just edits a single fight/encounter
-		message.
+	Add a command to "search" an area, generating encounters and items without
+		moving.
 
 	Add something to buy with money. Probably make money easier to get (increase
 		item values and maybe add another way to get money).
@@ -208,3 +207,22 @@ UI
 			glares at you / charges you / rushes you / leaps at you / speeds
 			towards you / runs at you) {adverb}!
 		"""
+		
+
+
+DONE:
+
+	To reduce spam: control the fights with an inline keyboard (buttons that
+		appear under the message in the chat) that just edits a single fight/encounter
+		message.
+		- When editing (or sending a message, there is an upper limit of 4096
+			characters. If the limit is reached, just start removing characters
+			from the top of the message being edited. Reaching this limit in a
+			fight should be unlikely anyway.
+		- In progress... hopefully just finished the sendCombatOutput() function
+			in telegramBot.py.
+		- Need a script to update the save files. Remember to make backups before [don't actually need this]
+			running the script.
+			+ Luckily, I don't actually want to load the combat state from the
+				save file, so I never attempt to load the new state data. This
+				means that I don't actually need to update the save files.
