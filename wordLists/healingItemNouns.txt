@@ -73,10 +73,10 @@ plate of scrambled eggs
 eggs benedict
 bowl of baked beans
 bowl of grilled vegetables
-bowl of  roasted vegetables
-bowl of  steamed vegetables
-bowl of  stir-fried vegetables
-bowl of  mashed potatoes
+bowl of roasted vegetables
+bowl of steamed vegetables
+bowl of stir-fried vegetables
+bowl of mashed potatoes
 baked potato
 plate of french fries
 plate of hash browns
