@@ -82,7 +82,7 @@ class Inventory:
 			self.items[item.name] = newItem
 	
 	def use(self, itemName, player):
-		output = "error"
+		output = ""
 		if itemName in self.items:
 			item = self.items[itemName]
 			if item.use == Item.CONSUME:
@@ -97,11 +97,13 @@ class Inventory:
 				if item.isEquipped:
 					player.maxHp -= item.boost
 					if player.hp > player.maxHp:
-						player.hp = maxHp
+						player.hp = player.maxHp
 					item.isEquipped = False
 					player.equippedSet.remove(item.bodyPart)
 					output = "You take off the " + item.name + "."
 				elif item.bodyPart not in player.equippedSet:
+					if player.hp == player.maxHp:
+						player.hp += item.boost
 					player.maxHp += item.boost
 					item.isEquipped = True
 					player.equippedSet.add(item.bodyPart)
@@ -126,14 +128,14 @@ class Inventory:
 		return output
 	
 	def sell(self, itemName, player):
-		output = "error"
+		output = ""
 		if itemName in self.items:
 			item = self.items[itemName]
 			if item.use == Item.EQUIP_ARMOR:
 				if item.isEquipped:
 					player.maxHp -= item.boost
 					if player.hp > player.maxHp:
-						player.hp = maxHp
+						player.hp = player.maxHp
 					item.isEquipped = False
 					player.equippedSet.remove(item.bodyPart)
 					output = "You take off the " + item.name + "."
@@ -143,9 +145,10 @@ class Inventory:
 					item.isEquipped = False
 					player.equippedSet.remove(item.bodyPart)
 					output = "You put away the " + item.name + "."
-			player.gold += item.quantity * item.value
+			soldFor = item.quantity * item.value
+			player.gold += soldFor
 			del self.items[itemName]
-			output = "You sell the " + item.name + " for " + str(item.value) + " gold coins."
+			output += "\nYou sell the " + item.name + " for " + str(soldFor) + " gold coins."
 		else:
 			output = "Trying to sell something you don't own is a form of fraud."
 		return output

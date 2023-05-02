@@ -1,5 +1,9 @@
 Bugs:
 
+	Selling items shouldn't automatically sell every copy of that item. If the
+		player has that item equipped but wants to sell a spare, they will lose
+		the equipped item.
+
 	Weapon nouns are not sorted by power. If there isn't a good reason to keep
 		them unordered, make the weapon nouns scale similarly to the armor nouns.
 
