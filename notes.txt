@@ -1,6 +1,6 @@
 Bugs:
 
-	Weapon names are not sorted by power. If there isn't a good reason to keep
+	Weapon nouns are not sorted by power. If there isn't a good reason to keep
 		them unordered, make the weapon nouns scale similarly to the armor nouns.
 
 	Combat hp doesn't match /stats hp in the group chat:
@@ -226,3 +226,7 @@ DONE:
 			+ Luckily, I don't actually want to load the combat state from the
 				save file, so I never attempt to load the new state data. This
 				means that I don't actually need to update the save files.
+	
+	Make healing items stronger so players don't die so often. They should more
+		than recover the amount of hit points a player is likely to lose to
+		the encounter that spawns the healing item.

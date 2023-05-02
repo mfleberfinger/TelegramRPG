@@ -214,8 +214,8 @@ class World():
 		return self.__generateWeapon(difficulty)
 	
 	def __generateConsumable(self, difficulty):
-		maxHp = difficulty * 17
-		minHp = round(maxHp / 2) # May be 0 at low difficulty. This is acceptable.
+		maxHp = difficulty * 34
+		minHp = round(maxHp / 1.5)
 		sellValue = random.randrange(difficulty, 2 * difficulty)
 		hp = random.randrange(minHp, maxHp + 1)
 		name = ""
@@ -229,7 +229,7 @@ class World():
 	
 	def __generateArmor(self, difficulty):
 		maxHp = difficulty * 10
-		minHp = round(maxHp / 2) # May be 0 at low difficulty. This is acceptable.
+		minHp = round(maxHp / 2)
 		sellValue = random.randrange(difficulty, 2 * difficulty)
 		hp = random.randrange(minHp, maxHp + 1)
 		bodyPart = random.choice([items.Equipment.TORSO, items.Equipment.HEAD, items.Equipment.LEGS])
