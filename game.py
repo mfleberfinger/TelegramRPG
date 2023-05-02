@@ -51,6 +51,8 @@ class Game:
 				return "ERROR: Direction invalid."
 			place = self.gameState.world.getPlace(coords)
 			self.gameState.player.locationCoords = coords
+			# Adding an element to a set is idempotent. We can just keep "adding"
+			# already discovered places repeatedly without causing errors or altering the count.
 			self.gameState.player.placesDiscovered.add(coords)
 			the = ""
 			if not place.name[0].isupper():
@@ -62,6 +64,33 @@ class Game:
 		else:
 			output = "You're free to leave, but you'll have to admit that you want to flee."
 		return output
+
+	# Trigger encounters without moving.
+	def search(self):
+		verb = random.choice(["scan", "explore", "investigate", "probe", "examine",
+			"scrutinize", "delve into", "ferret through", "dig through", "scout",
+			"rummage around in", "check out"])
+		adverb = random.choice(self.gameState.world.adverbs)
+		place = self.gameState.world.getPlace(self.gameState.player.locationCoords)
+		output = ""
+		coords = self.gameState.player.locationCoords
+		if not self.isInCombat:
+			the = ""
+			if not place.name[0].isupper():
+				the = "the "
+			output = "You {0} {1} {2}{3}.".format(adverb, verb, the, place.name)
+			# Decide whether to start a fight.
+			randValue = random.randrange(3)
+			if coords != (0, 0) and randValue == 0:
+				output += "\n" + self.__startFight()
+			elif coords != (0, 0) and randValue == 1:
+				output += self.__givePlayerItem()
+			else:
+				output += "\n" + "You don't find anything."
+		else:
+			output = "You're a bit too preoccupied to search for anything right now."
+		return output
+		
 
 	def __startFight(self):
 		output = ""
@@ -186,18 +215,22 @@ class Game:
 				p.levelUp()
 				output += "\nYou advance to level {0}!".format(p.level)
 			if random.randrange(2) == 0:
-				itemTemplate = random.choice(self.gameState.world.map[p.locationCoords].lootList)
-				item = None
-				if itemTemplate.use == items.Item.EQUIP_ARMOR:
-					item = items.Armor(itemTemplate.name, itemTemplate.bodyPart, itemTemplate.boost, itemTemplate.value)
-				elif itemTemplate.use == items.Item.EQUIP_WEAPON:
-					item = items.Weapon(itemTemplate.name, itemTemplate.boost, itemTemplate.value)
-				else: # consumable
-					item = items.Consumable(itemTemplate.name, itemTemplate.hpRestored, itemTemplate.value)
-				self.gameState.inventory.addItem(item)
-				p.itemsFound += 1
-				aAn = Game.aAn(item.name)
-				output += "\nYou find {0} {1}!".format(aAn, item.name)
+				output += self.__givePlayerItem()
 		elif self.fight.state != monsters.Fight.FLED:
 			return "Error. Fight object in unexpected state."
 		return output
+	
+	def __givePlayerItem(self):
+		p = self.gameState.player
+		itemTemplate = random.choice(self.gameState.world.map[p.locationCoords].lootList)
+		item = None
+		if itemTemplate.use == items.Item.EQUIP_ARMOR:
+			item = items.Armor(itemTemplate.name, itemTemplate.bodyPart, itemTemplate.boost, itemTemplate.value)
+		elif itemTemplate.use == items.Item.EQUIP_WEAPON:
+			item = items.Weapon(itemTemplate.name, itemTemplate.boost, itemTemplate.value)
+		else: # consumable
+			item = items.Consumable(itemTemplate.name, itemTemplate.hpRestored, itemTemplate.value)
+		self.gameState.inventory.addItem(item)
+		p.itemsFound += 1
+		aAn = Game.aAn(item.name)
+		return "\nYou find {0} {1}!".format(aAn, item.name)

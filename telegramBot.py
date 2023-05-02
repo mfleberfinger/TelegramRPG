@@ -61,6 +61,7 @@ def help(message):
                 "e - Go East.\n" +
                 "s - Go South.\n" +
                 "w - Go West.\n" +
+				"search - Search your current location.\n" +
                 "stats - View player stats.\n" +
                 "list - List your items.\n" +
                 "use - Wear, wield, or consume an item. Usage: use item_name\n" +
@@ -70,7 +71,7 @@ def help(message):
         bot.reply_to(message, output)
 
 # Receive all messages and parse them as commands if valid.
-@bot.message_handler(commands = ["start", "n", "e", "s", "w", "stats", "list", "use", "sell", "attack", "flee"])
+@bot.message_handler(commands = ["start", "n", "e", "s", "w", "search", "stats", "list", "use", "sell", "attack", "flee"])
 def handle_command(message):
 	chatId = message.chat.id
 	output = ""
@@ -105,6 +106,8 @@ def handle_command(message):
 		output += g.move(game.Game.SOUTH)
 	elif cmdSplit[0] == "/w":
 		output += g.move(game.Game.WEST)
+	elif cmdSplit[0] == "/search":
+		output += g.search()
 	elif cmdSplit[0] == "/stats":
 		output += g.stats()
 	elif cmdSplit[0] == "/list":
