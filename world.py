@@ -140,7 +140,7 @@ class World():
 					name = ""
 			hp = random.randrange(minHp, maxHp + 1)
 			power = random.randrange(minPower, maxPower + 1)
-            # self.xpForNextLevel += round(math.pow(1.1, self.level))
+            # self.xpForNextLevel += round(100 * math.pow(1.1, self.level))
 			# Monster xp reward at difficulty level N: round(30 * math.pow(1.085, N))
 			xpReward = round(30 * math.pow(1.085, difficulty))
 			monsterList.append(monsters.Monster(name, hp, power, xpReward))

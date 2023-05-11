@@ -118,7 +118,7 @@ player stats																	[done]
 		way to buy things)
 	- Player xp required to level up: previousRequirement + round(previousRequirement * 1.1)
 		+ BAD! This keeps adding the xp requirement for all previous levels to each new level.
-			Do this instead: self.xpForNextLevel += round(math.pow(1.1, self.level))
+			Do this instead: self.xpForNextLevel += round(100 * math.pow(1.1, self.level))
 	- Monster xp reward at difficulty level N: round(30 * math.pow(1.085, N))
 
 movement																		[done]
