@@ -1,5 +1,18 @@
 Bugs:
 
+	Need to adjust the xp curve or increase xp reward more quickly.
+		- Level 9
+		- experience points: 23625
+		- next level at: 37834
+
+	Still spawning double space items: "squalling bowl of  stir-fried vegetables"	[fixed]
+		- It seems like I fixed this bug correctly the first time. This was probably 
+			spawned because it was generated before I fixed the healing item noun list.
+
+	The Telegram bot doesn't seem to always send messages when the player levels up. Is
+		this related to the changes to add the updating message with the attack
+		and flee buttons?
+
 	Selling items shouldn't automatically sell every copy of that item. If the
 		player has that item equipped but wants to sell a spare, they will lose
 		the equipped item.
@@ -48,6 +61,12 @@ Bugs:
 
 New Features:
 
+	When the player gets an item, display its stats with the name to avoid the
+		need to use /list every time.
+
+	Add logging to debug strange issues (e.g. bot stops responding with no error
+		messages)?
+
 	Add a command to "search" an area, generating encounters and items without
 		moving.
 
@@ -58,6 +77,10 @@ New Features:
 		to bother adding features: http://gamelab.mit.edu/research/puzzledice/
 		
 	Generate a map of all discovered areas and send to chat as an image.
+
+	Craiyon seems to have an API... it might be free? Haven't found documentation yet.
+		- https://api.craiyon.com/
+		- https://github.com/FireHead90544/craiyon.py
 
 
 inventory																		[done]
@@ -94,6 +117,8 @@ player stats																	[done]
 	- gold coins: useless, except as a form of points/score (there will be no
 		way to buy things)
 	- Player xp required to level up: previousRequirement + round(previousRequirement * 1.1)
+		+ BAD! This keeps adding the xp requirement for all previous levels to each new level.
+			Do this instead: self.xpForNextLevel += round(math.pow(1.1, self.level))
 	- Monster xp reward at difficulty level N: round(30 * math.pow(1.085, N))
 
 movement																		[done]

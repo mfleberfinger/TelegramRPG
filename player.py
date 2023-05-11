@@ -18,10 +18,11 @@ class Player:
 		self.deaths = 0
 	
 	# Monster xp reward at difficulty level N: round(30 * math.pow(1.085, N))
-	# Player xp required to level up: previousRequirement + round(previousRequirement * 1.1)
+	# Player xp required to level up: previousRequirement + round(1.1 ^ self.level)
 	def levelUp(self):
 		self.level += 1
-		self.xpForNextLevel += round(self.xpForNextLevel * 1.1)
+		# Bad: self.xpForNextLevel += round(self.xpForNextLevel * 1.1)
+		self.xpForNextLevel += round(math.pow(1.1, self.level))
 		self.power += 1
 		self.hp += 50
 		self.maxHp += 50
