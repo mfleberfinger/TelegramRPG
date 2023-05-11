@@ -1,6 +1,10 @@
+# Vim swap file
+*.swp
+
 # Bot API Token
 token
-# Saved game folder.
+
+# Saved game folder
 savedGames/
 
 # Byte-compiled / optimized / DLL files
