@@ -340,7 +340,7 @@ class World():
 		return adverb + adjective + noun + postfix
 	
 	# This should be called every time the program starts, in case new words were
-	# added. We don't want to rely on what we have in the saved state because it
+	# added. We don't want to rely on what we have in the saved state because
 	# these lists might change. I should probably not save the word lists in the
 	# save state but that takes more effort than just shoving everything into
 	# one big object ¯\_(ツ)_/¯
