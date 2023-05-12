@@ -19,8 +19,10 @@ hawk
 eagle
 cat
 fox
+giant rat
 dog
 microdragon
+mega-rat
 kangaroo
 horse
 mime
@@ -35,6 +37,17 @@ gruppin
 lynx
 ocelot
 bandit
+skeleton
+slime
+slime ball
+slime sphere
+slime cube
+slime toroid
+slime dodecahedron
+slime mobius strip
+slime tetrahedron
+slime cylinder
+slime polygon
 hyena
 cheetah
 jaguar
@@ -44,8 +57,13 @@ lion
 warthog
 gorilla
 bear
+kobold
+goblin
+hobgoblin
+cultist
 soldier
 mercenary
+animated armor
 chimpanzee
 giant squid
 anaconda
@@ -55,6 +73,7 @@ alligator
 hippopotamus
 crocodile
 komodo dragon
+hellhound
 landshark
 elephant
 mammoth
@@ -62,6 +81,10 @@ gremlin
 mimic
 imp
 ball of tentacles
+giant crab
+giant spider
+giant centipede
+giant scorpion
 harpy
 banshee
 gargoyle
@@ -78,6 +101,7 @@ peryton
 selkie
 siren
 rake
+mind flayer
 slenderman
 wendigo
 yowie
@@ -92,8 +116,7 @@ manticore
 unicorn
 dragon turtle
 tyrannosaurus rex
-behemoth
-leviathan
+ghoul
 chimera
 hydra
 gorgon
@@ -115,13 +138,24 @@ troll
 vampire
 werewolf
 ghost
+specter
+wraith
 zombie
+mummy
+elemental
+air elemental
+water elemental
+fire elemental
+earth elemental
+plutonium elemental
 witch
 wizard
 warlock
 sorcerer
 sphinx
 minotaur
+behemoth
+leviathan
 dragon
 jersey devil
 mothman
@@ -129,4 +163,5 @@ demon
 godzilla
 demigod
 devil
+seraphim
 god
