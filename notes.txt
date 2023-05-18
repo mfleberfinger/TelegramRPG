@@ -1,14 +1,5 @@
 Bugs:
 
-	Need to adjust the xp curve or increase xp reward more quickly.
-		- Level 9
-		- experience points: 23625
-		- next level at: 37834
-
-	Still spawning double space items: "squalling bowl of  stir-fried vegetables"	[fixed]
-		- It seems like I fixed this bug correctly the first time. This was probably 
-			spawned because it was generated before I fixed the healing item noun list.
-
 	The Telegram bot doesn't seem to always send messages when the player levels up. Is
 		this related to the changes to add the updating message with the attack
 		and flee buttons?
@@ -259,3 +250,12 @@ DONE:
 	Make healing items stronger so players don't die so often. They should more
 		than recover the amount of hit points a player is likely to lose to
 		the encounter that spawns the healing item.
+
+	Need to adjust the xp curve or increase xp reward more quickly. [done]
+		- Level 9
+		- experience points: 23625
+		- next level at: 37834
+
+	Still spawning double space items: "squalling bowl of  stir-fried vegetables"	[fixed]
+		- It seems like I fixed this bug correctly the first time. This was probably 
+			spawned because it was generated before I fixed the healing item noun list.
