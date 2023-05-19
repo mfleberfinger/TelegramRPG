@@ -221,6 +221,7 @@ class Game:
 		return output
 	
 	def __givePlayerItem(self):
+		output = ""
 		p = self.gameState.player
 		itemTemplate = random.choice(self.gameState.world.map[p.locationCoords].lootList)
 		item = None
@@ -233,4 +234,6 @@ class Game:
 		self.gameState.inventory.addItem(item)
 		p.itemsFound += 1
 		aAn = Game.aAn(item.name)
-		return "\nYou find {0} {1}!".format(aAn, item.name)
+		output += "\nYou find {0} {1}!".format(aAn, item.name)
+		output += "\n   ({0})".format(item.effectDescription)
+		return output

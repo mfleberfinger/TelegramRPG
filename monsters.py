@@ -62,7 +62,7 @@ class Fight:
 			output += "\n\n" + self.__monsterTurn()
 		return output
 	
-	# Player skips their turn (probably by running some non-combat command).
+	# Player skips their turn (probably by using an item).
 	def skip(self):
 		return self.__monsterTurn()
 	
