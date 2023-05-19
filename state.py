@@ -18,6 +18,7 @@ class State:
 			self.player = loadedState.player
 			self.inventory = loadedState.inventory
 			self.world = loadedState.world
+			self.world.loadWordLists()
 			self.newGame = False # If True, the Telegram bot will send an intro message.
 			# Used to determine whether a fight is in progress by remembering whether the
 			# Game instance said we were in a fight during the most recent command.

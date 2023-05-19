@@ -146,26 +146,31 @@ class World():
 			monsterList.append(monsters.Monster(name, hp, power, xpReward))
 		return monsterList
 	
+	# Mean and standard deviation used to generate random numbers with a
+	# normal (Gaussian) distribution. The mean should be index of the average
+	# (e.g. monster, item power) for an area. Standard deviation gives the "typical"
+	# spread of monsters in an area. Weird outliers are possible and desirable.
+	# Mean will range from the index 10% of the way up the list at difficulty
+	# 1 to 90% of the way up the list at difficulty at or above 100.
+	# This will be a linear relationship... y = mx + b
+	# m = slope, b = y-intercept, difficulty = area difficulty, stdev = standard deviation,
+	# words = list of words to choose from.
+	def __getWordByDifficulty(self, m, b, difficulty, stdDev, words):
+		percentOfList = clamp(round(m * difficulty + b), 10, 90)
+		mean = math.floor((percentOfList / 100) * len(words))
+		nounIndex = clamp(round(random.gauss(mean, stdDev)), 0, len(words) - 1)
+		return words[nounIndex]
+	
 	def __generateMonsterName(self, difficulty):
 		# 1/ADJECTIVE_CHANCE of using an adjective.
 		ADJECTIVE_CHANCE = 4
 		# 1/POSTFIX_CHANCE of using a postfix.
 		POSTFIX_CHANCE = 4
-		# Mean and standard deviation used to generate random numbers with a
-		# normal (Gaussian) distribution. The mean should be index of the average
-		# monster for an area. Standard deviation gives the "typical" spread of
-		# monsters in an area. Weird outliers are possible and desirable.
-		# Mean will range from the index 10% of the way up the list at difficulty
-		# 1 to 90% of the way up the list at difficulty at or above 100.
-		# This will be a linear relationship... y = mx + b
 		m = 80 / 99
 		b = 90 - (8000 / 99)
-		percentOfList = clamp(round(m * difficulty + b), 10, 90)
-		mean = math.floor((percentOfList / 100) * len(self.monsterNounsByPower))
 		# Standard deviation will be 1/13 of the list's length.
 		stdDev = round(len(self.monsterNounsByPower) / 13)
-		nounIndex = clamp(round(random.gauss(mean, stdDev)), 0, len(self.monsterNounsByPower) - 1)
-		noun = self.monsterNounsByPower[nounIndex]
+		noun = self.__getWordByDifficulty(m, b, difficulty, stdDev, self.monsterNounsByPower)
 		# Decide whether to use an adjective and choose one if yes.
 		adjective = ""
 		if random.randrange(ADJECTIVE_CHANCE) == 0:
@@ -249,7 +254,7 @@ class World():
 		power = random.randrange(minPower, maxPower + 1)
 		name = ""
 		while name == "":
-			name = self.__generateWeaponName()
+			name = self.__generateWeaponName(difficulty)
 			if name in self.usedItemNames:
 				name = ""
 			else:
@@ -262,8 +267,11 @@ class World():
 	def testGenerateArmorName(self, bodyPart, difficulty):
 		return self.__generateArmorName(bodyPart, difficulty)
 		
-	def testGenerateWeaponName(self):
-		return self.__generateWeaponName()
+	def testGenerateWeaponName(self, difficulty):
+		return self.__generateWeaponName(difficulty)
+	
+	def testGenerateMonsterName(self, difficulty):
+		return self.__generateMonsterName(difficulty)
 	
 	def __generateConsumableName(self):
 		# 1/ADJECTIVE_CHANCE of using an adjective.
@@ -296,7 +304,6 @@ class World():
 		# name generation.
 		m = 80 / 99
 		b = 90 - (8000 / 99)
-		percentOfList = clamp(round(m * difficulty + b), 10, 90)
 		nounList = []
 		if bodyPart == items.Equipment.TORSO:
 			nounList = self.torsoEquipmentNounsByProtection
@@ -304,11 +311,9 @@ class World():
 			nounList = self.headEquipmentNounsByProtection
 		else: #items.Equipment.LEGS
 			nounList = self.legEquipmentNounsByProtection
-		mean = math.floor((percentOfList / 100) * len(nounList))
 		# Standard deviation will be 1/13 of the list's length.
 		stdDev = round(len(nounList) / 13)
-		nounIndex = clamp(round(random.gauss(mean, stdDev)), 0, len(nounList) - 1)
-		noun = nounList[nounIndex]
+		noun = self.__getWordByDifficulty(m, b, difficulty, stdDev, nounList)
 		adjective = ""
 		adverb = ""
 		if random.randrange(ADJECTIVE_CHANCE) == 0:
@@ -320,14 +325,21 @@ class World():
 			postfix = " " + random.choice(self.postfixes)
 		return adverb + adjective + noun + postfix
 	
-	def __generateWeaponName(self):
+	def __generateWeaponName(self, difficulty):
 		# 1/ADJECTIVE_CHANCE of using an adjective.
 		ADJECTIVE_CHANCE = 4
 		# 1/ADVERB_CHANCE of using an adverb, if an adjective was used.
 		ADVERB_CHANCE = 4
 		# 1/POSTFIX_CHANCE of using a postfix.
 		POSTFIX_CHANCE = 4
-		noun = random.choice(self.weaponNouns)
+		# Mean and standard deviation used to generate random numbers with a
+		# normal (Gaussian) distribution. This works in the same way as monster
+		# name generation.
+		m = 80 / 99
+		b = 90 - (8000 / 99)
+		# Standard deviation will be 1/13 of the list's length.
+		stdDev = round(len(self.weaponNounsByPower) / 13)
+		noun = self.__getWordByDifficulty(m, b, difficulty, stdDev, self.weaponNounsByPower)
 		adjective = ""
 		adverb = ""
 		if random.randrange(ADJECTIVE_CHANCE) == 0:
@@ -346,29 +358,29 @@ class World():
 	# one big object ¯\_(ツ)_/¯
 	def loadWordLists(self):
 		with open("wordLists/monsterAdjectives.txt") as f:
-			self.monsterAdjectives = f.read().split("\n")
+			self.monsterAdjectives = f.read().strip().split("\n")
 		with open("wordLists/adverbs.txt") as f:
-			self.adverbs = f.read().split("\n")
+			self.adverbs = f.read().strip().split("\n")
 		with open("wordLists/monsterNounsByPower.txt") as f:
-			self.monsterNounsByPower = f.read().split("\n")
+			self.monsterNounsByPower = f.read().strip().split("\n")
 		with open("wordLists/placeAdjectives.txt") as f:
-			self.placeAdjectives = f.read().split("\n")
+			self.placeAdjectives = f.read().strip().split("\n")
 		with open("wordLists/headEquipmentNounsByProtection.txt") as f:
-			self.headEquipmentNounsByProtection = f.read().split("\n")
+			self.headEquipmentNounsByProtection = f.read().strip().split("\n")
 		with open("wordLists/placeNounsBySimilarity.txt") as f:
-			self.placeNounsBySimilarity = f.read().split("\n")
+			self.placeNounsBySimilarity = f.read().strip().split("\n")
 		with open("wordLists/healingItemNouns.txt") as f:
-			self.healingItemNouns = f.read().split("\n")
+			self.healingItemNouns = f.read().strip().split("\n")
 		with open("wordLists/postfixes.txt") as f:
-			self.postfixes = f.read().split("\n")
+			self.postfixes = f.read().strip().split("\n")
 		with open("wordLists/itemAdjectives.txt") as f:
-			self.itemAdjectives = f.read().split("\n")
+			self.itemAdjectives = f.read().strip().split("\n")
 		with open("wordLists/torsoEquipmentNounsByProtection.txt") as f:
-			self.torsoEquipmentNounsByProtection = f.read().split("\n")
+			self.torsoEquipmentNounsByProtection = f.read().strip().split("\n")
 		with open("wordLists/legEquipmentNounsByProtection.txt") as f:
-			self.legEquipmentNounsByProtection = f.read().split("\n")
-		with open("wordLists/weaponNouns.txt") as f:
-			self.weaponNouns = f.read().split("\n")
+			self.legEquipmentNounsByProtection = f.read().strip().split("\n")
+		with open("wordLists/weaponNounsByPower.txt") as f:
+			self.weaponNounsByPower = f.read().strip().split("\n")
 		# Dictionary of lists of indices to locate all instances of a place noun
 		# in self.placeNounsBySimilarity for the purpose of naming nearby places
 		# "similarly."
