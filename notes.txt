@@ -1,5 +1,13 @@
 Bugs:
 
+    Using the /list command with too many items fails to send a message because the
+        message is too long for the API. Need to write a method in the bot to break
+        output into multiple messages if needed (if over 4000 characters?).
+		- Also need to somehow handle the case where the large item list needs to
+			be sent while the combat message is being used. Maybe need to stop
+			truncating that message when it gets too large and just create a new
+			message with the buttons.
+
 	The Telegram bot doesn't seem to always send messages when the player levels up. Is
 		this related to the changes to add the updating message with the attack
 		and flee buttons?
