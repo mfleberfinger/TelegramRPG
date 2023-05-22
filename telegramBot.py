@@ -3,6 +3,7 @@ import game
 import re
 import state
 import telebot
+import math
 
 BOT_NAME = "@tiny_rpg_bot"
 #BOT_NAME = "@Mltest_bot"
@@ -40,7 +41,7 @@ def sendCombatOutput(chatId, output, g, s):
 		# Message text longer than 4096 characters can cause errors.
 		# This situation should be unlikely so we'll just get rid of all of
 		# the old output from this fight if it happens.
-		if len(newOutput) > 4096:
+		if len(newOutput) > 4096: 
 			newOutput = output
 		bot.edit_message_text(newOutput, chatId, s.combatMessageId, reply_markup=combatMarkup)
 		s.combatMessageText = newOutput
@@ -127,8 +128,24 @@ def handle_command(message):
 	elif cmdSplit[0] == "/flee":
 		output += g.flee()
 	if output != "":
-		if s.wasInCombat or g.isInCombat:
+		# If the player has a large enough number of items and passes the /list
+		# command, that can send a message longer than 4096 characters on its own.
+		# In that case, just send it as a series of new messages, regardless of
+		# whether a fight is in progress.
+		if len(output) <= 4096 and (s.wasInCombat or g.isInCombat):
 			sendCombatOutput(chatId, output, g, s)
+		elif len(output) > 4096:
+			# Break the output into chunks of no more than 4096 characters.
+			quotient = math.floor(len(output) / 4096)
+			remainder = len(output) % 4096
+			toSend = ""
+			replyMessage = message
+			for i in range(quotient):
+				toSend = output[i * 4096 : (i + 1) * 4096]
+				replyMessage = bot.reply_to(replyMessage, toSend)
+			if remainder > 0:
+				toSend = output[quotient * 4096 : (quotient * 4096) + remainder]
+				bot.reply_to(replyMessage, toSend)
 		else:
 			bot.reply_to(message, output)
 	#print("output = " + output)

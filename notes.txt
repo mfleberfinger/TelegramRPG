@@ -1,13 +1,5 @@
 Bugs:
 
-    Using the /list command with too many items fails to send a message because the
-        message is too long for the API. Need to write a method in the bot to break
-        output into multiple messages if needed (if over 4000 characters?).
-		- Also need to somehow handle the case where the large item list needs to
-			be sent while the combat message is being used. Maybe need to stop
-			truncating that message when it gets too large and just create a new
-			message with the buttons.
-
 	The Telegram bot doesn't seem to always send messages when the player levels up. Is
 		this related to the changes to add the updating message with the attack
 		and flee buttons?
@@ -15,9 +7,6 @@ Bugs:
 	Selling items shouldn't automatically sell every copy of that item. If the
 		player has that item equipped but wants to sell a spare, they will lose
 		the equipped item.
-
-	Weapon nouns are not sorted by power. If there isn't a good reason to keep
-		them unordered, make the weapon nouns scale similarly to the armor nouns.
 
 	Combat hp doesn't match /stats hp in the group chat:
 		
@@ -46,28 +35,13 @@ Bugs:
 		items found: 1
 		"""
 
-	Item names with capital letters can't be used or sold: [fixed (the easy way)]
-		- Possible fixes:
-			+ Easier: Make the Telegram bot accept mixed case commands, instead [done]
-				of converting them to all lowercase.
-			+ Better: Keep converting commands to lowercase and also convert all
-				names to lowercase before putting them in the dictionary.
-				-> Would need to write a program to fix the dictionaries in the
-					save files to use all lowercase keys to avoid losing the
-					group's game.
-
 
 
 New Features:
 
-	When the player gets an item, display its stats with the name to avoid the
-		need to use /list every time.
-
 	Add logging to debug strange issues (e.g. bot stops responding with no error
 		messages)?
 
-	Add a command to "search" an area, generating encounters and items without
-		moving.
 
 	Add something to buy with money. Probably make money easier to get (increase
 		item values and maybe add another way to get money).
@@ -80,6 +54,8 @@ New Features:
 	Craiyon seems to have an API... it might be free? Haven't found documentation yet.
 		- https://api.craiyon.com/
 		- https://github.com/FireHead90544/craiyon.py
+		- Might be able to have it generate images for my randomly generated
+			names.
 
 
 inventory																		[done]
@@ -239,6 +215,33 @@ UI
 
 
 DONE:
+	
+	Add a command to "search" an area, generating encounters and items without
+		moving.
+
+	When the player gets an item, display its stats with the name to avoid the
+		need to use /list every time.
+
+	Item names with capital letters can't be used or sold: [fixed (the easy way)]
+		- Possible fixes:
+			+ Easier: Make the Telegram bot accept mixed case commands, instead [done]
+				of converting them to all lowercase.
+			+ Better: Keep converting commands to lowercase and also convert all
+				names to lowercase before putting them in the dictionary.
+				-> Would need to write a program to fix the dictionaries in the
+					save files to use all lowercase keys to avoid losing the
+					group's game.
+
+    Using the /list command with too many items fails to send a message because the
+        message is too long for the API. Need to write a method in the bot to break
+        output into multiple messages if needed (if over 4096 characters).
+		- Also need to somehow handle the case where the large item list needs to	[just sending long item lists in their own message]
+			be sent while the combat message is being used. Maybe need to stop
+			truncating that message when it gets too large and just create a new
+			message with the buttons.
+
+	Weapon nouns are not sorted by power. If there isn't a good reason to keep
+		them unordered, make the weapon nouns scale similarly to the armor nouns.
 
 	To reduce spam: control the fights with an inline keyboard (buttons that
 		appear under the message in the chat) that just edits a single fight/encounter
