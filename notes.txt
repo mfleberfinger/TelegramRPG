@@ -50,6 +50,9 @@ New Features:
 		to bother adding features: http://gamelab.mit.edu/research/puzzledice/
 		
 	Generate a map of all discovered areas and send to chat as an image.
+		- See the "PIL (Python Image Manipulation)" bookmark folder in Firefox
+			and /home/matthew/PIL Tests for information on how to make an image
+			and a simple (and bad) example of what a map might look like.
 
 	Craiyon seems to have an API... it might be free? Haven't found documentation yet.
 		- https://api.craiyon.com/
